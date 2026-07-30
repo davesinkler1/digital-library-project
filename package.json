@@ -1,0 +1,47 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbo",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@nextui-org/react": "^2.6.11",
+    "@prisma/client": "^6.19.3",
+    "@prisma/config": "^7.9.0",
+    "@react-pdf-viewer/core": "^3.12.0",
+    "@react-pdf-viewer/default-layout": "^3.12.0",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^20.12.7",
+    "@types/react": "18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "clsx": "^2.1.1",
+    "cookies-next": "^6.1.1",
+    "dotenv": "^17.4.2",
+    "js-cookie": "^3.0.8",
+    "mongodb": "^7.5.0",
+    "ms": "3.0.0-canary.1",
+    "next": "14.2.35",
+    "pdfjs-dist": "3.10.111",
+    "pdfobject": "^2.3.1",
+    "postcss": "^8.5.22",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-pdf": "^10.4.1",
+    "server-only": "^0.0.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.4.5",
+    "use-debounce": "^10.1.1"
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "singleQuote": true,
+    "semi": false,
+    "tabWidth": 2,
+    "trailingComma": "none"
+  },
+  "devDependencies": {
+    "prisma": "^6.19.3"
+  }
+}
