@@ -1,35 +1,45 @@
 'use client'
 
 import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
-import { Input } from '@nextui-org/react'
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useDebouncedCallback } from 'use-debounce';
-import React from 'react'
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useDebounce } from "use-debounce";
+
 
 const Search = () => {
+    const router = useRouter()
+    const [text, setText] = useState('')
+    const [query] = useDebounce(text, 1000)
 
-    const searchParams = useSearchParams();
-    const pathName = usePathname();
-    const {replace} = useRouter();
-    const handleChange = useDebouncedCallback((term: string) => {
-        const params = new URLSearchParams(searchParams);
-        if (term) {
-            params.set('query', term);
-        } else {
-            params.delete('query');
-        }
-        replace(`${pathName}?${params.toString()}`);
-    }, 300);
+    useEffect(() => {
+        console.log("query: " + query);
+            if (!query) return;
+            router.replace(`/list?search=${encodeURIComponent(query)}`)
+    }, [query, router])
+
 
     return (
-        <div className="p-4 flex items-center justify-center bg-gradient-to-br from-sky-400 to-indigo-500">
-            <Input
-            onChange={(e) => handleChange(e.target.value)} 
-            className="w-96 shadow"
-            defaultValue={searchParams.get('query')?.toString()} 
-            endContent={<MagnifyingGlassIcon className="size-1 text-slate-500"/>}/>
+        <div className="relative rounded-md shadow-sm">
+            <input
+                    value={text}
+                    placeholder="Search books..."
+                    onChange={(e) => setText(e.target.value)}
+                    onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                     router.push(`/list?search=${encodeURIComponent(text)}`);
+                        }
+                    }}
+                    className="block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"/>
+
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pl-3">
+                        <MagnifyingGlassIcon
+                        className='h-5 w-5 text-gray-400'
+                        aria-hidden='true'
+                    />
+                    </div>
         </div>
     )
+    
 }
 
 export default Search

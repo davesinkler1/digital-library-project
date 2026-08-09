@@ -29,6 +29,7 @@ async function init() {
 }
 
 export const getBook = async ({
+  query,
   page = 1,
   limit = 10
 }: {
@@ -40,19 +41,66 @@ export const getBook = async ({
     if (!books) await init()
     const skip = (page - 1) * limit
 
-    const result = await books
-      .find()
-      .limit(limit)
-      .skip(skip)
-      .toArray()
+    const pipeline: PipelineStage[] = [{ $skip: skip }, { $limit: limit }]
 
-      console.log(result)
+    console.log("Search query:", query);
 
-      return { books: result }
+     if (query) {
+      pipeline.unshift({
+        $search: {
+          index: 'search',
+          text: {
+            query: query!,
+            fuzzy: {
+              maxEdits: 1,
+              prefixLength: 3,
+              maxExpansions: 50
+            },
+            path: {
+              wildcard: '*'
+            }
+          }
+        }
+      })
+    }
+
+    await sleep(1000)
+
+    const result = await books.aggregate(pipeline).toArray()
+
+    return { books: result }
   } catch (error) {
     return { error }
   }
 }
+
+async function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+type PipelineStage =
+  | {
+      $search: {
+        index: string;
+        text: {
+          query: string;
+          fuzzy: {
+            maxEdits: number;
+            prefixLength: number;
+            maxExpansions: number;
+          };
+          path: {
+            wildcard: string;
+          };
+        };
+      };
+    }
+  | {
+      $skip: number;
+    }
+  | {
+      $limit: number;
+    };
 
 
 export async function getDB() {
