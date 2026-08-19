@@ -63,7 +63,7 @@ const RSCPage = async ({
       </div>
       <br></br>
        {books?.map(books => (
-        <ul key={books._id.toString()}><DisplayLink title={books.name} 
+        <ul key={books._id.toString()}><DisplayLink image={books.image} title={books.name} 
         author={books.author}
         year={books.year}
         url="/books" 

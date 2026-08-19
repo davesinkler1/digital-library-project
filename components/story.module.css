@@ -24,11 +24,13 @@
 }
 
 .title > a {
+  margin-left: 5%;
   color: #000;
   text-decoration: none;
 }
 
 .title > a:visited {
+  margin-left: 5%;
   color: #757575;
 }
 
