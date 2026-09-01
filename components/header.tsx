@@ -2,9 +2,7 @@ import styles from './header.module.css'
 import Link from 'next/link'
 
 const navItems = [
-  { title: 'new' },
-  { title: 'show' },
-  { title: 'submit' }
+  
 ]
 
 export default function Header() {

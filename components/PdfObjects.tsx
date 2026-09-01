@@ -14,8 +14,8 @@ export default function PdfObjects({ url }: PdfViewerProps) {
     // Ensure the container element exists before embedding
     if (containerRef.current) {
       const options = {
-        height: "1000px",
-        width: "1000px",
+        height: "1500px",
+        width: "1500px",
         fallbackLink: "<p>This browser does not support inline PDFs. Please <a href='[url]'>download the PDF</a> to view it.</p>"
       };
 
@@ -29,8 +29,8 @@ export default function PdfObjects({ url }: PdfViewerProps) {
   return (
     <div 
       ref={containerRef} 
-      className="w-full h-[80vh] border border-gray-200 rounded-lg"
-      style={{ minHeight: "1000px" }} // Fallback height fallback if Tailwind isn't fully loaded
+      className="w-fit h-[80vh] border border-gray-200 rounded-lg"
+      style={{ minHeight: "1500px", minWidth: "1500px" }} // Fallback height fallback if Tailwind isn't fully loaded
     />
   );
 }

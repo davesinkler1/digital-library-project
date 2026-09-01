@@ -34,6 +34,6 @@ export default function DisplayLink({image, title, author, year, url, pdf}) {
                 <span>{author}, {year}</span>
             </div>
         </div>
-    </div>
+        </div>
     )
 }

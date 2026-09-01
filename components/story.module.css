@@ -1,8 +1,12 @@
 
 .story {
   flex: 100 1;
-  display: inline-block;
   margin-bottom: 1%;
+  display: inline-block;
+}
+
+.images {
+  display: inline-block;
 }
 
 .title {
@@ -35,6 +39,8 @@
 }
 
 .meta {
+  display: inline-block;
+  margin-left: 1%;
   font-size: 12px;
 }
 .source {

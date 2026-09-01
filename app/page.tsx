@@ -62,6 +62,7 @@ const RSCPage = async ({
           </button>
       </div>
       <br></br>
+      <div className='flex gap-15'>
        {books?.map(books => (
         <ul key={books._id.toString()}><DisplayLink image={books.image} title={books.name} 
         author={books.author}
@@ -69,6 +70,7 @@ const RSCPage = async ({
         url="/books" 
         pdf ={books.pdf}></DisplayLink></ul>
       ))}
+      </div>
       <br/>
     </div>
   )
